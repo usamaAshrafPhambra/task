@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { del } from "request";
+import { Link } from "react-router-dom";
 
 import { addTask } from "../actions/task";
 import { deleteTask } from "../actions/task";
 import { fetchTaskList } from "../actions/task";
+import { updateTask } from "../actions/task";
 
-
-function TaskForm({ addTask, fetchTaskList, deleteTask, data }) {
+function TaskForm({ addTask, fetchTaskList, deleteTask, updateTask, data }) {
   const [formData, setformData] = useState({
     name: "",
   });
 
-  
-
   const { name } = formData;
 
   const onChange = (e) => {
-    setformData({ name: e.target.value });
+    setformData({ ...formData, name: e.target.value });
+  };
+
+  const handleUpdate = (e) => {
+    console.log(e);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     addTask(name);
-    
   };
 
   useEffect(() => {
@@ -35,11 +36,11 @@ function TaskForm({ addTask, fetchTaskList, deleteTask, data }) {
     data !== undefined &&
     data.map((task) => (
       <tr key={task._id}>
-        <td>{task.name}</td>
         <td>
-          <i 
-         
-          className="fas fa-pen"></i>
+          <Link to={`/todo/${task._id}`}>{task.name}</Link>
+        </td>
+        <td>
+          <i onClick={(e) => handleUpdate(e)} className="fas fa-pen"></i>
         </td>
         <td>
           <i
@@ -87,8 +88,12 @@ function TaskForm({ addTask, fetchTaskList, deleteTask, data }) {
 
 const mapStateToProps = (state) => ({
   data: state.task.taskList,
+  task: state.task.task,
 });
 
-export default connect(mapStateToProps, { addTask, fetchTaskList, deleteTask })(
-  TaskForm
-);
+export default connect(mapStateToProps, {
+  addTask,
+  fetchTaskList,
+  deleteTask,
+  updateTask,
+})(TaskForm);

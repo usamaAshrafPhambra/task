@@ -12,18 +12,28 @@ export default function (state = initialState, action) {
         ...state,
         taskList: payload,
       };
+
     case "ADD_TASK_S":
       return {
         ...state,
         tasks: [...state.tasks, payload],
       };
 
-      case "DELETE_TASK_S":
+    case "DELETE_TASK_S":
       return {
         ...state,
-        taskList : state.taskList.filter(task=>task._id !== payload)
+        taskList: state.taskList.filter((task) => task._id !== payload),
       };
-     
+    case "UPDATE_TASK_S":
+      return {
+        ...state,
+        taskList: state.taskList.map((task) =>
+          task._id === action.payload.id
+            ? { ...task, task: action.payload }
+            : task
+        ),
+      };
+
     default:
       return state;
   }
