@@ -27,7 +27,7 @@ Router.post("/", async (req, res) => {
 });
 
 //route for get tasks
-Router.get("/", async (req, res) => {
+Router.get("/task", async (req, res) => {
   try {
     const tasks = await Task.find();
 
@@ -55,7 +55,7 @@ Router.get("/:id", async (req, res) => {
 });
 
 //route for delete task
-Router.delete("/:id", async (req, res) => {
+Router.delete("/task/:id", async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
 

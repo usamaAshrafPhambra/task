@@ -2,7 +2,7 @@ import axios from "axios";
 
 // GETING TASK LIST
 export const fetchTaskList = () => {
-  return axios.get("http://localhost:6060").then((res) => res.data);
+  return axios.get("http://localhost:6060/task").then((res) => res.data);
 };
 
 //post request for add task
@@ -17,7 +17,7 @@ export const addTask = (data) => {
 export const deleteTask = (id) =>{
   
   return axios
-  .delete(`http://localhost:6060/${id}`, {id : id})
+  .delete(`http://localhost:6060/task/${id}`, {id : id})
   .then((res) => res.data);
 };
 

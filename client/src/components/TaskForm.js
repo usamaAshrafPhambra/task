@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { addTask } from "../actions/task";
-import { deleteTask } from "../actions/task";
-import { fetchTaskList } from "../actions/task";
-import { updateTask } from "../actions/task";
 
-function TaskForm({ addTask, fetchTaskList, deleteTask, updateTask, data }) {
+
+function TaskForm({ addTask }) {
   const [formData, setformData] = useState({
     name: "",
   });
@@ -18,9 +16,7 @@ function TaskForm({ addTask, fetchTaskList, deleteTask, updateTask, data }) {
     setformData({ ...formData, name: e.target.value });
   };
 
-  const handleUpdate = (e) => {
-    console.log(e);
-  };
+ 
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -28,33 +24,13 @@ function TaskForm({ addTask, fetchTaskList, deleteTask, updateTask, data }) {
     addTask(name);
   };
 
-  useEffect(() => {
-    fetchTaskList();
-  }, [data]);
-
-  const taskLists =
-    data !== undefined &&
-    data.map((task) => (
-      <tr key={task._id}>
-        <td>
-          <Link to={`/todo/${task._id}`}>{task.name}</Link>
-        </td>
-        <td>
-          <i onClick={(e) => handleUpdate(e)} className="fas fa-pen"></i>
-        </td>
-        <td>
-          <i
-            onClick={(e) => {
-              deleteTask(task._id);
-            }}
-            className="fas fa-trash"
-          ></i>
-        </td>
-      </tr>
-    ));
+  
+ 
+     
 
   return (
     <div className="container">
+
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <input
           type="text"
@@ -72,28 +48,17 @@ function TaskForm({ addTask, fetchTaskList, deleteTask, updateTask, data }) {
           className="btn btn-primary"
         />
       </form>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>{taskLists}</tbody>
-      </table>
+      <p className="btn my-1">
+        <Link to="/task">Getting to tasks</Link>
+      </p>
+     
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({
-  data: state.task.taskList,
-  task: state.task.task,
-});
 
-export default connect(mapStateToProps, {
+
+export default connect(null, {
   addTask,
-  fetchTaskList,
-  deleteTask,
-  updateTask,
+  
 })(TaskForm);
