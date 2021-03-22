@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 import { addTask } from "../actions/task";
 
-
 function TaskForm({ addTask }) {
   const [formData, setformData] = useState({
     name: "",
@@ -16,25 +15,21 @@ function TaskForm({ addTask }) {
     setformData({ ...formData, name: e.target.value });
   };
 
- 
-
   const onSubmit = (e) => {
     e.preventDefault();
 
     addTask(name);
+    setformData({
+      name: "",
+    });
   };
-
-  
- 
-     
 
   return (
     <div className="container">
-
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Task Name"
           name="name"
           value={name}
           onChange={(e) => onChange(e)}
@@ -51,14 +46,10 @@ function TaskForm({ addTask }) {
       <p className="btn my-1">
         <Link to="/task">Getting to tasks</Link>
       </p>
-     
     </div>
   );
 }
 
-
-
 export default connect(null, {
   addTask,
-  
 })(TaskForm);

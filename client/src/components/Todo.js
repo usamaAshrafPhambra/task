@@ -23,11 +23,15 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo }) {
   const onSubmit = (e) => {
     e.preventDefault();
     addTodo(formData, match.params.id);
+    setFormData({
+      title: "",
+      date:""
+    });
   };
 
   useEffect(() => {
     getTodo(match.params.id);
-  }, [getTodo, match.params.id]);
+  }, [getTodo, match.params.id,data]);
 
   const todoLists =
     data !== undefined &&
