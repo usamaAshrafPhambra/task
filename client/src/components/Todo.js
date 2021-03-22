@@ -27,7 +27,7 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo }) {
 
   useEffect(() => {
     getTodo(match.params.id);
-  }, [getTodo, match.params.id, data]);
+  }, [getTodo, match.params.id]);
 
   const todoLists =
     data !== undefined &&

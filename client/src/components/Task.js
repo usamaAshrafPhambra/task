@@ -12,7 +12,7 @@ const Task = ({ fetchTaskList, deleteTask, updateTask, data,}) => {
 
     useEffect(() => {
         fetchTaskList();
-      }, [data]);
+      }, [fetchTaskList]);
       const taskLists =
       data !== undefined &&
       data.map((task) => (
