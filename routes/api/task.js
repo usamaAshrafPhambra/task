@@ -113,7 +113,7 @@ Router.post("/todo/:id", async (req, res) => {
       id: task.id,
       date: req.body.date,
     });
-    console.log(newTodo);
+    
     const todo = await newTodo.save();
 
     res.json(todo);

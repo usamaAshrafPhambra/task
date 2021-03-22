@@ -37,7 +37,7 @@ export const getTodo = (id) => {
 
 //add todo
 export const addTodo = (data, id) => {
-  console.log('API' , data)
+  
   return axios
     .post(`http://localhost:5000/todo/${id}`, {title : data.title, date : data.date})
     .then((res) => res.data);
