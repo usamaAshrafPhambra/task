@@ -4,7 +4,7 @@ import * as API from "../services/API";
 
 function* getTodoSaga(action) {
   const { payload } = action;
-
+  
   try {
     const task = yield call(API.getTodo, payload);
 

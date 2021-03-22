@@ -1,4 +1,6 @@
+
 import React, { useState } from "react";
+
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,18 +8,20 @@ import { addTask } from "../actions/task";
 
 function TaskForm({ addTask }) {
   const [formData, setformData] = useState({
-    name: "",
+    name: ""
+    
   });
 
   const { name } = formData;
 
   const onChange = (e) => {
-    setformData({ ...formData, name: e.target.value });
+    setformData({ ...formData, name: e.target.value  });
   };
 
   const onSubmit = (e) => {
+   
     e.preventDefault();
-
+    
     addTask(name);
     setformData({
       name: "",
@@ -29,7 +33,7 @@ function TaskForm({ addTask }) {
       <form className="form" onSubmit={(e) => onSubmit(e)}>
         <input
           type="text"
-          placeholder="Task Name"
+          placeholder="Name"
           name="name"
           value={name}
           onChange={(e) => onChange(e)}

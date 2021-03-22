@@ -23,14 +23,15 @@ export const deleteTask = (id) =>{
 
 //update request for task
 export const updateTask = (id,name) =>{
-  console.log('api',id,name)
+  
   return axios
   .put(`/${id}`, {id : id, name : name})
   .then((res) => res.data);
 };
 
 export const getTodo = (id) => {
-  return axios.get(`/todo/${id}`).then((res) => res.data);
+  
+  return axios.get(`/todo/${id}`, {id : id}).then((res) => res.data);
 };
 
 
@@ -39,7 +40,7 @@ export const getTodo = (id) => {
 export const addTodo = (data, id) => {
   
   return axios
-    .post(`/todo/${id}`, {title : data.title, date : data.date})
+    .post(`/todo/${id}`, {title : data.title, date : data.date, id:id})
     .then((res) => res.data);
 };
 

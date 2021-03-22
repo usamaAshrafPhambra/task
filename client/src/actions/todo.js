@@ -1,13 +1,16 @@
 //ACTION FOR GET TODO
 export const getTodo = (id) => {
+ 
   return { type: "GET_TODO", payload: id };
 };
 
 //ACTION FOR ADD TODO
-export const addTodo = (data) => {
+export const addTodo = (data,id) => {
+  
   return {
     type: "ADD_TODO",
     payload: data,
+    id : id
   };
 };
 

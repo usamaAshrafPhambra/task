@@ -3,10 +3,10 @@ import { takeEvery, call, put } from "redux-saga/effects";
 import * as API from "../services/API";
 
 function* addTodoSaga(action) {
-  const { payload } = action;
-
+  const { payload,id } = action;
+  
   try {
-    const todo = yield call(API.addTodo, payload);
+    const todo = yield call(API.addTodo, payload,id);
 
     yield put({ type: "ADD_TODO_S", payload: todo });
   } catch (e) {

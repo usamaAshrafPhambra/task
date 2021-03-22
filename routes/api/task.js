@@ -93,7 +93,7 @@ Router.put("/:id", async (req, res) => {
 //get todo
 Router.get("/todo/:id", async (req, res) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find().where({ id: req.params.id });
 
     res.json(todos);
   } catch (err) {
@@ -106,14 +106,14 @@ Router.get("/todo/:id", async (req, res) => {
 Router.post("/todo/:id", async (req, res) => {
   // if( !mongoose.Types.ObjectId.isValid(id) ) return false;
   try {
-    let task = await Task.find().select("id");
+    let task = await Task.findById(req.body.id);
 
     const newTodo = new Todo({
+      id: task._id,
       title: req.body.title,
-      id: task.id,
       date: req.body.date,
     });
-    
+
     const todo = await newTodo.save();
 
     res.json(todo);

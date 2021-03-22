@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 const todoSchema = new Schema({
   id: {
     type: mongoose.Schema.Types.ObjectId,
-    
     ref: "task",
   },
   title: {
@@ -13,7 +12,7 @@ const todoSchema = new Schema({
   },
   date: {
     type: Date,
-  }
+  },
 });
 
 module.exports = Todo = mongoose.model("todo", todoSchema);
