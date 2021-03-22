@@ -8,14 +8,14 @@ App.use(express.json({ extended: false }));
 App.use(cors());
 App.use("/", require("./routes/api/task"));
 //serve static assets
-// if (process.env.NODE_ENV === "production") {
-//   //   //set static folder
-//   App.use(express.static("client/build"));
+if (process.env.NODE_ENV === "production") {
+  //   //set static folder
+  App.use(express.static("client/build"));
 
-//   App.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
+  App.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 const PORT = process.env.PORT || 6060;
 App.listen(PORT, () => {
   console.log(`server start on ${PORT}`);
