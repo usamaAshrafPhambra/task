@@ -22,13 +22,15 @@ export const deleteTask = (id) =>{
 };
 
 //update request for task
-export const updateTask = (id,name) =>{
-  
+export const updateTaskR = (id,name) =>{
+  console.log(id,name)
   return axios
-  .put(`/${id}`, {id : id, name : name})
+  .put(`/update/${id}`, {id : id, name : name})
   .then((res) => res.data);
 };
 
+
+//geting todo
 export const getTodo = (id) => {
   
   return axios.get(`/todo/${id}`, {id : id}).then((res) => res.data);
@@ -54,11 +56,11 @@ export const deleteTodo = (id) =>{
 };
 
 
-//update request for task
+//update request for todo
 export const updateTodo = (id,data) =>{
   
   return axios
-  .put(`/todo/${id}`, {id : id, data : data})
+  .put(`/todoupdate/${id}`, {title : data.title, date : data.date, id:id})
   .then((res) => res.data);
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { getTodo } from "../actions/todo";
 import { addTodo } from "../actions/todo";
@@ -8,11 +9,18 @@ import { deleteTodo } from "../actions/todo";
 
 import Moment from "react-moment";
 
-function Todo({ data, match, getTodo, addTodo, deleteTodo }) {
+function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
   const [formData, setFormData] = useState({
     title: "",
     date: "",
   });
+
+  const handleClick = (todo) => {
+    console.log(todo);
+    const param = todo;
+    console.log(param);
+    history.push(`/todoupdate/${todo.id}`, param);
+  };
 
   const { title, date } = formData;
 
@@ -25,13 +33,13 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo }) {
     addTodo(formData, match.params.id);
     setFormData({
       title: "",
-      date:""
+      date: "",
     });
   };
 
   useEffect(() => {
     getTodo(match.params.id);
-  }, [getTodo, match.params.id,data]);
+  }, [getTodo, match.params.id, data]);
 
   const todoLists =
     data !== undefined &&
@@ -39,10 +47,15 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo }) {
       <tr key={todo._id}>
         <td>{todo.title}</td>
         <td>
-          <Moment format='DD/MM/YYYY'>{todo.date}</Moment>
+          <Moment format="DD/MM/YYYY">{todo.date}</Moment>
         </td>
         <td>
-          <i className="fas fa-pen"></i>
+          <i
+            onClick={(e) => {
+              handleClick({ id: todo._id, title: todo.title });
+            }}
+            className="fas fa-pen"
+          ></i>
         </td>
         <td>
           <i
@@ -108,4 +121,6 @@ const mapStateToProps = (state) => ({
   data: state.todo.todos,
 });
 
-export default connect(mapStateToProps, { getTodo, addTodo, deleteTodo })(Todo);
+export default connect(mapStateToProps, { getTodo, addTodo, deleteTodo })(
+  withRouter(Todo)
+);

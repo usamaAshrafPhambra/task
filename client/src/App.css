@@ -252,6 +252,7 @@ img {
 }
 
 .form input[type='submit'],
+.form input[type='update'],
 button {
   font: inherit;
 }

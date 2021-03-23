@@ -23,9 +23,10 @@ export const deleteTodo = (id) => {
 };
 
 //ACTION FOR UPDATE TODO
-export const updateTodo = (data) => {
+export const updateTodo = (data,id) => {
   return {
     type: "UPDATE_TODO",
     payload: data,
+    id : id
   };
 };

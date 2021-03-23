@@ -69,7 +69,7 @@ Router.delete("/task/:id", async (req, res) => {
 });
 
 // route for update task
-Router.put("/:id", async (req, res) => {
+Router.put("/update/:id", async (req, res) => {
   const { task } = req.body;
 
   const newTask = {};
@@ -138,7 +138,7 @@ Router.delete("/todo/:id", async (req, res) => {
 });
 
 // route for update todo
-Router.put("todo/:id/:todo_id", async (req, res) => {
+Router.put("/todoupdate/:todo_id", async (req, res) => {
   const { todo } = req.body;
 
   const newTodo = {};

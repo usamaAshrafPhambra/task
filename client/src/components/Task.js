@@ -1,13 +1,23 @@
 import React, { useEffect } from "react";
+import { withRouter } from 'react-router-dom';
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import Update from './Update';
 // import { addTask } from "../actions/task";
 import { deleteTask } from "../actions/task";
 import { fetchTaskList } from "../actions/task";
-import { updateTask } from "../actions/task";
+// import { updateTask } from "../actions/task";
 
-const Task = ({ fetchTaskList, deleteTask, updateTask, data }) => {
+const Task = ({ fetchTaskList, deleteTask, data, history }) => {
+  // const handleClick = (task)=>{
+  //   console.log(task)
+    
+  //   console.log(task);
+  //   history.push( `/update/${task.id}`,task)
+  // }
+
+  
+
   useEffect(() => {
     fetchTaskList();
   }, [fetchTaskList, data]);
@@ -19,7 +29,15 @@ const Task = ({ fetchTaskList, deleteTask, updateTask, data }) => {
           <Link to={`/todo/${task._id}`}>{task.name}</Link>
         </td>
         <td>
-          <i className="fas fa-pen"></i>
+         
+            <i
+            onClick={(e) => { 
+              // handleClick({id : task._id,name : task.name})
+              history.push(`/update/${task._id}`,{id : task._id,name : task.name})
+            }}
+            className="fas fa-pen"
+          ></i>
+          
         </td>
         <td>
           <i
@@ -59,5 +77,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   fetchTaskList,
   deleteTask,
-  updateTask,
-})(Task);
+})(withRouter(Task));

@@ -21,7 +21,7 @@ function TaskForm({ addTask }) {
   const onSubmit = (e) => {
    
     e.preventDefault();
-    
+    console.log(name);
     addTask(name);
     setformData({
       name: "",
