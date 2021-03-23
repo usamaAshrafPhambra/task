@@ -70,16 +70,20 @@ Router.delete("/task/:id", async (req, res) => {
 
 // route for update task
 Router.put("/update/:id", async (req, res) => {
-  const { task } = req.body;
-
+  const { name } = req.body;
+  console.log('req',req.body)
   const newTask = {};
-  if (task) newTask.task = task;
+  if (name) newTask.name = name;
 
   try {
-    let task = await Task.findById(req.params.id);
-
+    let task = await Task.findById(req.body.id);
+    console.log('task',task,req.body.name)
     if (task) {
-      await task.update({ $set: newTask }, { new: true });
+      await task.updateOne(
+        {name : req.body.name},
+        { $set: newTask }, 
+        { new: true });
+      console.log('after',task)
       return res.json(task);
     }
 

@@ -3,7 +3,8 @@ import { takeEvery, call, put } from "redux-saga/effects";
 import * as API from "../services/API";
 
 function* updateTaskSaga(action) {
-  const { payload, id} = action;
+  const { payload,id } = action;
+  
   console.log('sagas action',payload , id)
   try {
     const task = yield call(API.updateTaskR, payload ,id);

@@ -25,6 +25,7 @@ function task (state = initialState, action) {
         taskList: state.taskList.filter((task) => task._id !== payload),
       };
     case "UPDATE_TASK_S":
+      console.log('reducer',payload)
       return {
         ...state,
         taskList: state.taskList.map((task) =>

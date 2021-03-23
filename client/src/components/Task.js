@@ -29,7 +29,9 @@ const Task = ({ fetchTaskList, deleteTask, data, history }) => {
           <Link to={`/todo/${task._id}`}>{task.name}</Link>
         </td>
         <td>
-         
+         {/* <Link to={{pathname: `/update/${task._id}`,
+         state:{id : task._id,name : task.name}
+        }}> */}
             <i
             onClick={(e) => { 
               // handleClick({id : task._id,name : task.name})
@@ -37,7 +39,7 @@ const Task = ({ fetchTaskList, deleteTask, data, history }) => {
             }}
             className="fas fa-pen"
           ></i>
-          
+          {/* </Link> */}
         </td>
         <td>
           <i

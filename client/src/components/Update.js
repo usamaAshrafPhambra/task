@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from "react";
-
+import {useLocation} from 'react-router';
 import { connect } from "react-redux";
 
 import { updateTask } from "../actions/task";
 
-const Update = (task,{ updateTask }) => {
+const Update = ({ updateTask,history }) => {
   const [formData, setformData] = useState({
     name: "",
   });
+  const task = useLocation();
+  
+ 
   useEffect(() => {
     setformData({
-      name: !task.location.state.name ? " " : task.location.state.name,
+      name: !task.state.name ? " " : task.state.name,
     });
-    // console.log(state)
+    
   }, [task]);
+  
+    
 
-  const { name } = formData;
-  const id = task.location.state.id;
+  const  {name}  = formData;
+  const id = task.state.id;
   const onChange = (e) => {
     setformData({ ...formData, name: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, id);
-    updateTask(name, )
+    
+    updateTask(name,id);
+    history.push('/task')
   };
 
   return (
