@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 
 import { connect } from "react-redux";
@@ -8,20 +7,18 @@ import { addTask } from "../actions/task";
 
 function TaskForm({ addTask }) {
   const [formData, setformData] = useState({
-    name: ""
-    
+    name: "",
   });
 
   const { name } = formData;
 
   const onChange = (e) => {
-    setformData({ ...formData, name: e.target.value  });
+    setformData({ ...formData, name: e.target.value });
   };
 
   const onSubmit = (e) => {
-   
     e.preventDefault();
-    console.log(name);
+
     addTask(name);
     setformData({
       name: "",

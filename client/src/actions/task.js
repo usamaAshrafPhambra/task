@@ -26,14 +26,9 @@ export const deleteTask = (id) => {
 //ACTION FOR UPDATE TASK
 
 export const updateTask = (name, id) => {
-  console.log('action',name, id)
   return {
     type: "UPDATE_TASK",
     payload: name,
-    id :id
+    id: id,
   };
 };
-
-
-
-

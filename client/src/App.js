@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/update/:id" component={Update} />
           <Route exact path="/" component={TaskForm} />
           <Route exact path="/todo/:id" component={Todo} />
-          <Route exact path="/todoupdate/:id" component={UpdateTodo} />
+          <Route exact path="/todoupdate/:id/" component={UpdateTodo} />
 
         </Switch>
       </BrowserRouter>

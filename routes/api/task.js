@@ -71,19 +71,20 @@ Router.delete("/task/:id", async (req, res) => {
 // route for update task
 Router.put("/update/:id", async (req, res) => {
   const { name } = req.body;
-  console.log('req',req.body)
+
   const newTask = {};
   if (name) newTask.name = name;
 
   try {
     let task = await Task.findById(req.body.id);
-    console.log('task',task,req.body.name)
+
     if (task) {
       await task.updateOne(
-        {name : req.body.name},
-        { $set: newTask }, 
-        { new: true });
-      console.log('after',task)
+        { name: req.body.name },
+        { $set: newTask },
+        { new: true }
+      );
+
       return res.json(task);
     }
 
@@ -142,17 +143,22 @@ Router.delete("/todo/:id", async (req, res) => {
 });
 
 // route for update todo
-Router.put("/todoupdate/:todo_id", async (req, res) => {
-  const { todo } = req.body;
+Router.put("/todoupdate/:id", async (req, res) => {
+  const { title } = req.body;
 
   const newTodo = {};
-  if (todo) newTodo.todo = todo;
+  if (title) newTodo.title = title;
 
   try {
-    let todo = await Todo.findById(req.params.id);
+    let todo = await Todo.findById(req.body.id);
 
     if (todo) {
-      await todo.update({ $set: newTodo }, { new: true });
+      await todo.updateOne(
+        { title: req.body.title },
+        { $set: newTodo },
+        { new: true }
+      );
+
       return res.json(todo);
     }
 

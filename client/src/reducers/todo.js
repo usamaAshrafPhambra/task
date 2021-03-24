@@ -3,7 +3,7 @@ const initialState = {
   todos: [],
 };
 
- function todo (state = initialState, action) {
+function todo(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -28,7 +28,7 @@ const initialState = {
       return {
         ...state,
         todos: state.todos.map((todo) =>
-          todo._id === action.payload.id
+          todo._id === action.payload._id
             ? { ...todo, todo: action.payload }
             : todo
         ),

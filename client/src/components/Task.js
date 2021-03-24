@@ -1,23 +1,12 @@
 import React, { useEffect } from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Update from './Update';
-// import { addTask } from "../actions/task";
+
 import { deleteTask } from "../actions/task";
 import { fetchTaskList } from "../actions/task";
-// import { updateTask } from "../actions/task";
 
 const Task = ({ fetchTaskList, deleteTask, data, history }) => {
-  // const handleClick = (task)=>{
-  //   console.log(task)
-    
-  //   console.log(task);
-  //   history.push( `/update/${task.id}`,task)
-  // }
-
-  
-
   useEffect(() => {
     fetchTaskList();
   }, [fetchTaskList, data]);
@@ -29,17 +18,15 @@ const Task = ({ fetchTaskList, deleteTask, data, history }) => {
           <Link to={`/todo/${task._id}`}>{task.name}</Link>
         </td>
         <td>
-         {/* <Link to={{pathname: `/update/${task._id}`,
-         state:{id : task._id,name : task.name}
-        }}> */}
-            <i
-            onClick={(e) => { 
-              // handleClick({id : task._id,name : task.name})
-              history.push(`/update/${task._id}`,{id : task._id,name : task.name})
+          <i
+            onClick={(e) => {
+              history.push(`/update/${task._id}`, {
+                id: task._id,
+                name: task.name,
+              });
             }}
             className="fas fa-pen"
           ></i>
-          {/* </Link> */}
         </td>
         <td>
           <i

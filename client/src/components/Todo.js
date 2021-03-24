@@ -12,17 +12,9 @@ import Moment from "react-moment";
 function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
   const [formData, setFormData] = useState({
     title: "",
-    date: "",
   });
 
-  const handleClick = (todo) => {
-    console.log(todo);
-    const param = todo;
-    console.log(param);
-    history.push(`/todoupdate/${todo.id}`, param);
-  };
-
-  const { title, date } = formData;
+  const { title } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,7 +25,6 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
     addTodo(formData, match.params.id);
     setFormData({
       title: "",
-      date: "",
     });
   };
 
@@ -49,10 +40,15 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
         <td>
           <Moment format="DD/MM/YYYY">{todo.date}</Moment>
         </td>
+
         <td>
           <i
             onClick={(e) => {
-              handleClick({ id: todo._id, title: todo.title });
+              history.push(`/todoupdate/${todo._id}`, {
+                id: todo._id,
+                title: todo.title,
+                todo_id: todo.id,
+              });
             }}
             className="fas fa-pen"
           ></i>
@@ -86,15 +82,7 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
           required
           className="my-1"
         />
-        <input
-          type="date"
-          placeholder="Date"
-          name="date"
-          value={date}
-          onChange={(e) => onChange(e)}
-          required
-          className="my-1"
-        />
+
         <input
           type="submit"
           variant="contained"

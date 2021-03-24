@@ -11,7 +11,7 @@ function* updateTaskSaga(action) {
     console.log('sagas try', task)
     yield put({ type: "UPDATE_TASK_S", payload: task });
   } catch (e) {
-    console.log(e, "error");
+    console.error(e, "error");
   }
 }
 

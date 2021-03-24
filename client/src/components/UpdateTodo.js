@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { useLocation } from "react-router";
+
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+
 import { updateTodo } from "../actions/todo";
 
-const UpdateTodo = (param, { updateTodo, history }) => {
+const UpdateTodo = ({ updateTodo, history, }) => {
   const [formData, setformData] = useState({
-    title: param.location.state.title,
-
-    id: param.location.state.id,
+    title: "",
   });
-  // useEffect(()=>{
+  const todo = useLocation();
 
-  //   console.log('effect',param.location.state.id)
+  useEffect(() => {
+    setformData({
+      title: !todo.state.title ? " " : todo.state.title,
+    });
+  }, [todo]);
 
-  // },[param.location.state.id])
-
-  // const id = param.location.state.id
-  const { title, id } = formData;
-
+  const { title } = formData;
+  const id = todo.state.id;
+  
   const onChange = (e) => {
-    setformData({ ...formData, [e.target.name]: e.target.value });
+    setformData({ ...formData, title: e.target.value });
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("onSubmit", title, id);
-   
-    // updateTodo(title, id, history, true);
+    
+    updateTodo(title, id);
+    history.push(`/todo/${todo.state.todo_id}`)
   };
   return (
     <div className="container">
@@ -49,9 +51,10 @@ const UpdateTodo = (param, { updateTodo, history }) => {
           className="btn btn-primary my-1"
         />
       </form>
-      
     </div>
   );
 };
+
+
 
 export default connect(null, { updateTodo })(UpdateTodo);

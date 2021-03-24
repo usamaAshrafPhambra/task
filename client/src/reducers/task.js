@@ -3,7 +3,7 @@ const initialState = {
   tasks: [],
 };
 
-function task (state = initialState, action) {
+function task(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -25,7 +25,6 @@ function task (state = initialState, action) {
         taskList: state.taskList.filter((task) => task._id !== payload),
       };
     case "UPDATE_TASK_S":
-      console.log('reducer',payload)
       return {
         ...state,
         taskList: state.taskList.map((task) =>
