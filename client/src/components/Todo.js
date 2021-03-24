@@ -6,15 +6,25 @@ import { withRouter } from "react-router-dom";
 import { getTodo } from "../actions/todo";
 import { addTodo } from "../actions/todo";
 import { deleteTodo } from "../actions/todo";
+import { doneTodo } from "../actions/todo";
 
 import Moment from "react-moment";
 
-function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
+function Todo({
+  data,
+  match,
+  getTodo,
+  addTodo,
+  deleteTodo,
+  doneTodo,
+  history,
+}) {
   const [formData, setFormData] = useState({
     title: "",
+    done: false,
   });
 
-  const { title } = formData;
+  const { title, done } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,6 +46,19 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
     data !== undefined &&
     data.map((todo) => (
       <tr key={todo._id}>
+        <td
+          onClick={(e) => {
+            setFormData({ ...formData, done: "true" });
+
+            doneTodo(done, todo._id);
+          }}
+        >
+          {todo.done ? (
+            <i className="fa fa-check"></i>
+          ) : (
+            <i className="fa fa-times"></i>
+          )}
+        </td>
         <td>{todo.title}</td>
         <td>
           <Moment format="DD/MM/YYYY">{todo.date}</Moment>
@@ -93,6 +116,7 @@ function Todo({ data, match, getTodo, addTodo, deleteTodo, history }) {
       <table className="table">
         <thead>
           <tr>
+            <th>Done</th>
             <th>Title</th>
             <th>Date</th>
             <th>Edit</th>
@@ -109,6 +133,9 @@ const mapStateToProps = (state) => ({
   data: state.todo.todos,
 });
 
-export default connect(mapStateToProps, { getTodo, addTodo, deleteTodo })(
-  withRouter(Todo)
-);
+export default connect(mapStateToProps, {
+  getTodo,
+  addTodo,
+  deleteTodo,
+  doneTodo,
+})(withRouter(Todo));

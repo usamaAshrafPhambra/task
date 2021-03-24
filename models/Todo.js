@@ -10,6 +10,10 @@ const todoSchema = new Schema({
   title: {
     type: String,
   },
+  done:{
+    type : Boolean,
+    default: false
+  },
   date: {
     type: Date,
   },

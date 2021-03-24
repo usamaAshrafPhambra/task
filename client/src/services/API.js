@@ -46,3 +46,10 @@ export const updateTodo = (title, id) => {
     .put(`/todoupdate/${id}`, { title: title, id: id })
     .then((res) => res.data);
 };
+
+//update todo done
+export const updateDone = (done, id) => {
+  return axios
+    .put(`/todo/${id}`, { done: done, id: id })
+    .then((res) => res.data);
+};

@@ -9,6 +9,8 @@ import { waitForGetTodo } from "./sagas/getTodo";
 import { waitForAddTodo } from "./sagas/addTodo";
 import { waitForDeleteTodo } from "./sagas/deleteTodo";
 import { waitForUpdateTodo } from "./sagas/updateTodo";
+import { waitForUpdateDone } from "./sagas/updateDone";
+
 
 export default function* index() {
   yield all([
@@ -20,5 +22,6 @@ export default function* index() {
     waitForAddTodo(),
     waitForDeleteTodo(),
     waitForUpdateTodo(),
+    waitForUpdateDone(),
   ]);
 }

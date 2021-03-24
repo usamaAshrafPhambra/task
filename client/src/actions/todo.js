@@ -28,3 +28,12 @@ export const updateTodo = (title, id) => {
     id: id,
   };
 };
+
+//ACTION FOR UPDATE DONE
+export const doneTodo = (done, id) => {
+  return {
+    type: "UPDATE_DONE",
+    payload: done,
+    id: id,
+  };
+};

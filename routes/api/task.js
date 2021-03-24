@@ -169,4 +169,32 @@ Router.put("/todoupdate/:id", async (req, res) => {
   }
 });
 
+//update done
+
+Router.put("/todo/:id", async (req, res) => {
+  const { done } = req.body;
+
+  const newTodo = {};
+  if (done) newTodo.done = done;
+
+  try {
+    let todo = await Todo.findById(req.params.id);
+
+    if (todo) {
+      await todo.updateOne(
+        { done: req.body.done },
+        { $set: newTodo },
+        { new: true }
+      );
+
+      return res.json(todo);
+    }
+
+    res.json({ msg: " todo not updated!" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("server error in update task");
+  }
+});
+
 module.exports = Router;

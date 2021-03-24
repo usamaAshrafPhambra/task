@@ -33,6 +33,15 @@ function todo(state = initialState, action) {
             : todo
         ),
       };
+    case "UPDATE_DONE_S":
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo._id === action.payload._id
+            ? { ...todo, todo: action.payload }
+            : todo
+        ),
+      };
     default:
       return state;
   }
